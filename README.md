@@ -1,4 +1,5 @@
 MicroSlideshow
 ==============
 
-Mootools slideshow that only support fade transitions
+Mootools slideshow that only supports fade transitions
+Why would you need 50 transition when you only use one??
