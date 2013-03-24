@@ -1,4 +1,3 @@
-
 ;(function(){
     this.MicroSlideshow = new Class({
         Implements: [Options, Events],
@@ -74,7 +73,7 @@
         },
         show: function(slideNumber){
             var t = this;
-            if(t.current == slideNumber){
+            if(t.current == slideNumber || !t.slides[slideNumber]){
                 return;
             }
             t.slides[t.current]
@@ -92,6 +91,34 @@
                 t.fireEvent('afterShow');
             });
             return t;
+        },
+        slide: function(slideNumber){
+            var t = this;
+            if(!slideNumber || slideNumber == 'current'){
+                slideNumber = t.current;
+            }
+            else if(slideNumber == 'next'){
+                slideNumber = t.current+1;
+                if(slideNumber == t.slides.length){
+                    slideNumber = 0;
+                }
+            }
+            else if(slideNumber == 'previous'){
+                slideNumber = t.current-1;
+                if(slideNumber < 0){
+                    slideNumber = t.slides.length-1;
+                }
+            }
+            else if(slideNumber == 'first'){
+                slideNumber = 0;
+            }
+            else if(slideNumber == 'last'){
+                slideNumber = t.slides.length-1;
+            }
+            if(!t.slides[slideNumber]){
+                return false;
+            }
+            return t.slides[slideNumber];
         }
     });
 })();
